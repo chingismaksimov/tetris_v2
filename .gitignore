@@ -1,0 +1,14 @@
+# Environments
+.env
+
+# Mac specific
+.DS_Store
+
+# pyenv
+.python-version
+
+# Byte-compiled
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints
