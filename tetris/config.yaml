@@ -1,0 +1,10 @@
+pygame_config:
+  rectangle_size: 20 # size of rectange in pixels
+  display_width: 30 # display width in number of rectangles
+  display_height: 22 # display height in number of rectangles
+  fps: 100 # controls game speed
+  caption: Tetris
+  font: geneva
+  font_size: 30
+agent_type: linear
+trained_agent_file_path: "training/best_linear_agent.npy"

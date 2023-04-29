@@ -1,0 +1,16 @@
+n_epochs: 10
+games_per_member: 10
+model: linear
+model_parameters:
+  linear:
+    dim: 4
+    n_members: 100
+    low: -20
+    high: 20
+    bias: [-10, -10, 10, -1]
+    elitism: True
+    m: 0
+    std: 1
+save_best_member: False
+saving_paths:
+  linear: "training/best_linear_agent"
