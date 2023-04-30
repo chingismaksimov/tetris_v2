@@ -29,7 +29,7 @@ class BaseAgent(ABC):
         pass
 
     @abstractmethod
-    def mutate():
+    def _mutate():
         pass
 
     @abstractmethod

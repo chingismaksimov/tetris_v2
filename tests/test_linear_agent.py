@@ -1,6 +1,7 @@
 import pytest
 import numpy as np
-from tetris.agent.agent import LinearAgent, LinearAgentPopulation
+from tetris.agent.agent import LinearAgent
+from tetris.agent.population import LinearAgentPopulation
 
 
 @pytest.fixture
@@ -29,7 +30,7 @@ class TestMutate:
     @pytest.mark.parametrize("std", [-1, 0])
     def test_negative_std(self, linear_agent, std) -> None:
         with pytest.raises(ValueError):
-            linear_agent.mutate(0, std)
+            linear_agent._mutate(0, std)
 
     @pytest.mark.parametrize("m", [0, 1])
     @pytest.mark.parametrize("std", [1, 10])
@@ -37,7 +38,7 @@ class TestMutate:
         np.random.seed(4)
         true_weights = np.arange(3) + np.random.normal(m, std, 3)
         np.random.seed(4)
-        linear_agent.mutate(m, std)
+        linear_agent._mutate(m, std)
         np.testing.assert_array_equal(true_weights, linear_agent.w)
 
 
@@ -46,15 +47,15 @@ class TestLinearAgentPopulationInitMethod:
     A class to test `__init__` method of `LinearAgentPopulation` class.
     """
 
-    @pytest.mark.parametrize("bias", [None, np.asarray([10, 10, 10])])
-    def test_bias(self, bias) -> None:
+    @pytest.mark.parametrize("init_weights", [None, np.asarray([10, 10, 10])])
+    def test_bias(self, init_weights) -> None:
         np.random.seed(4)
-        linear_agent_population = LinearAgentPopulation(dim=3, bias=bias)
-        if bias is None:
-            bias = np.zeros(3)
+        linear_agent_population = LinearAgentPopulation(dim=3, init_weights=init_weights)
+        if init_weights is None:
+            init_weights = np.zeros(3)
         np.random.seed(4)
         for agent in linear_agent_population._members:
-            np.testing.assert_array_equal(agent.w, bias + np.random.uniform(0, 1, 3))
+            np.testing.assert_array_equal(agent.w, init_weights + np.random.uniform(0, 1, 3))
 
 
 @pytest.fixture(params=[False, True])
