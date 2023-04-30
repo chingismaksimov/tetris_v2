@@ -2,17 +2,24 @@ import pygame
 from pygame.locals import QUIT
 from tetris.utils import read_yaml_file, initialize_pygame, draw
 from tetris.project_root_path import project_root_path
-from tetris.agent.agent import LinearAgent
+from tetris.agent.agent import LinearAgent, NNAgent
 from tetris.environment.environment import TetrisEnvironment
 import numpy as np
 from pathlib import Path
+import pickle
 from typing import Dict, Any
 import sys
 
 
-def showcase_agent_play(config: Dict[str, Any]) -> None:
+def showcase_agent_play(config: Dict[str, Any]) -> None:  # noqa
+    trained_agent_path = project_root_path / Path(config["trained_agent_file_path"])
     if config["agent_type"] == "linear":
-        agent = LinearAgent(np.load(project_root_path / Path(config["trained_agent_file_path"])))
+        agent = LinearAgent(np.load(trained_agent_path))
+    elif config["agent_type"] == "nn":
+        with open(trained_agent_path, "rb") as f:
+            agent = NNAgent(*pickle.load(f).values())
+    else:
+        raise RuntimeError(f"Agent type '{agent}' not supported.")
 
     env = TetrisEnvironment()
 

@@ -1,16 +1,26 @@
-n_epochs: 10
+n_epochs: 100
 games_per_member: 10
-model: linear
+model: nn # linear or nn
 model_parameters:
   linear:
     dim: 4
-    n_members: 100
+    n_members: 10
     low: -20
     high: 20
-    bias: [-10, -10, 10, -1]
+    init_weights: [-10, -10, 10, -1]
     elitism: True
     m: 0
     std: 1
-save_best_member: False
+  nn:
+    dim: [4, 5] # number of neurons in input and hidden layers but without output layer
+    n_members: 100
+    low: -1
+    high: 1
+    activation: sigmoid # sigmoid / linear / relu / tanh
+    elitism: True
+    m: 0
+    std: 0.05
+save_best_member: True
 saving_paths:
   linear: "training/best_linear_agent"
+  nn: "training/best_nn_agent"

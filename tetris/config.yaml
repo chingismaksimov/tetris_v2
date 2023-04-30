@@ -6,5 +6,5 @@ pygame_config:
   caption: Tetris
   font: geneva
   font_size: 30
-agent_type: linear
+agent_type: linear # linear / nn
 trained_agent_file_path: "training/best_linear_agent.npy"

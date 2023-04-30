@@ -1,7 +1,7 @@
 from typing import Dict, Any
 from tetris.utils import read_yaml_file
 from tetris.project_root_path import project_root_path
-from tetris.agent.agent import LinearAgentPopulation
+from tetris.agent.population import LinearAgentPopulation, NNAgentPopulation
 from tetris.agent._base_classes import BasePopulation
 from tetris.environment.environment import TetrisEnvironment
 from pathlib import Path
@@ -10,7 +10,10 @@ from pathlib import Path
 def train(train_config: Dict[str, Any]):
     model = train_config["model"]
     if model == "linear":
-        population = LinearAgentPopulation(**train_config["model_parameters"]["linear"])
+        population = LinearAgentPopulation
+    elif model == "nn":
+        population = NNAgentPopulation
+    population = population(**train_config["model_parameters"][model])
 
     env = TetrisEnvironment()
 
