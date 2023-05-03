@@ -1,8 +1,7 @@
-# Title
->Project title.
+# Tetris
 
 ## Description
->Project description.
+The aim of the project is to train an agent to play Tetris by the application of neuroevolution algorithm.
 
 ## Prerequisities
 - pyenv
@@ -16,6 +15,4 @@ pyenv virtualenv 3.9.12 <env_name>
 pyenv local <env_name>
 python -m pip install poetry
 poetry install
-poetry run pre-commit install
-poetry run pre-commit autoupdate
 ```
